@@ -92,6 +92,25 @@ def updateScoreBaseOnDocumentSize(listOfScore):
     return listOfScore
 
 
+def showResult(resultList):
+    maxres = max(resultList)
+    index = resultList.index(maxres)
+    if index == 0:
+        return "صورت جلسه"
+    elif index == 1:
+        return "نامه"
+    elif index == 2:
+        return "تمرین"
+    elif index == 3:
+        return "مقاله"
+    elif index == 4:
+        return "پروپوزال"
+    elif index == 5:
+        return "کتاب"
+    elif index == 6:
+        return "پایان نامه"
+
+
 if __name__ == "__main__":
     """
     Specifying words related to each type of document.
@@ -117,3 +136,4 @@ if __name__ == "__main__":
     listOfScores = []
     listOfScores = setScoreBaseOnOccurrence(listOfScores)
     listOfScores = updateScoreBaseOnDocumentSize(listOfScores)
+    print(showResult(listOfScores))
