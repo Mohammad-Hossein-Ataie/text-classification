@@ -59,10 +59,45 @@ def isAscending(wordsList):
     return True
 
 
+def setScoreBaseOnOccurrence(listOfScore):
+    """
+    A scoring function based on word order and occurrence
+    """
+    for y in range(len(TotalWords)):
+        wordsList = checkOccurence(TotalWords[y])
+        sumation = 0
+        length = len(wordsList)
+        for p in range(length):
+            if wordsList[p] != -1:
+                sumation += 1
+        score = sumation / length
+        if isAscending(wordsList) == True and wordsList[-1] != -1:
+            score += 0.5
+        listOfScore.append(score)
+    return listOfScore
+
+
 if __name__ == "__main__":
+    """
+    Specifying words related to each type of document.
+    """
+    words_soratJalase = [["عنوان", "موضوع"], "تاریخ", "زمان", ["بحث", "مباحث"], ["تصمیمات", "مصوبات"], "امضا"]
+    words_naame = [["عنوان", "موضوع"], "سلام", "احترام", "تشکر", "امضا"]
+    words_tamrin = [["نام", "خانوادگی"], "شماره دانشجویی", "تمرین", ["پرسش", "سوال"], ["پاسخ", "جواب"]]
+    words_article = [["مولف ", "نویسنده"], "چکیده", "کلید¬واژه", "مقدمه", "ابزار", "روش", "نتایج", "جمع¬بندی",
+                     ["منابع ", "ارجاع"]]
+    words_proposal = ["عنوان ", " پروپوزال", ["استاد ", "راهنما"], "داوری", "نام دانشجو", "شماره", ["تعریف ", "مسئله"],
+                      ["پیشینه ", "پژوهش"], "مراجع", "روش", "خارجی"]
+    words_book = [" فهرست", ["پیشگفتار ", "درباره نویسنده"], " مقدمه", ["نویسنده ", "مترجم"], "فصل"]
+    words_payanNaame = [["عنوان ", "موضوع"], "پایان¬نامه", ["استاد ", "راهنما"], "نگارش",
+                        ["فهرست مطالب ", "فهرست اشکال"], "چکیده", ["فصل ", "فصول"], ["منابع ", "مراجع"],
+                        ["ضمیمه ", "پیوست"]]
+    TotalWords = [words_soratJalase, words_naame, words_tamrin, words_article, words_proposal, words_book,
+                  words_payanNaame]
+
     document = Document("test.docx")
     paras = [p.text for p in document.paragraphs if p.text]
     df = pd.DataFrame(paras)
     docSize = setDocSize(df)
-
-
+    listOfScores = []
+    listOfScores = setScoreBaseOnOccurrence(listOfScores)
