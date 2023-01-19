@@ -47,6 +47,18 @@ def checkOccurence(words):
     return rlist
 
 
+def isAscending(wordsList):
+    """
+    Function to check the order of occurrence of words
+    """
+    previous = wordsList[0]
+    for number in wordsList:
+        if number < previous:
+            return False
+        previous = number
+    return True
+
+
 if __name__ == "__main__":
     document = Document("test.docx")
     paras = [p.text for p in document.paragraphs if p.text]
