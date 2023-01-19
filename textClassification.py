@@ -77,6 +77,21 @@ def setScoreBaseOnOccurrence(listOfScore):
     return listOfScore
 
 
+def updateScoreBaseOnDocumentSize(listOfScore):
+    """
+    A function that updated each document score base on its size.
+    """
+    if docSize > 300:
+        listOfScore[1] -= 0.5
+    if docSize > 4000:
+        listOfScore[2] -= 0.6
+        listOfScore[4] -= 0.7
+        listOfScore[0] -= 0.5
+    if docSize > 8000:
+        listOfScore[3] -= 0.4
+    return listOfScore
+
+
 if __name__ == "__main__":
     """
     Specifying words related to each type of document.
@@ -101,3 +116,4 @@ if __name__ == "__main__":
     docSize = setDocSize(df)
     listOfScores = []
     listOfScores = setScoreBaseOnOccurrence(listOfScores)
+    listOfScores = updateScoreBaseOnDocumentSize(listOfScores)
